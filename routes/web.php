@@ -29,6 +29,12 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/consultar_reservas', 'App\Http\Controllers\ReservasController@consultar_reservas')->name('consultar_reservas');
+Route::get('/consultar_reservas/{reserva}', 'App\Http\Controllers\ReservasController@mostrar_reserva')->name('mostrar_reserva');
+Route::get('/realizar_reserva', 'App\Http\Controllers\ReservasController@realizar_reserva')->name('realizar_reserva');
+Route::post('/realizar_reserva', 'App\Http\Controllers\ReservasController@guardar')->name('guardar');
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
