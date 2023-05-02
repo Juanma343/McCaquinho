@@ -8,7 +8,7 @@
             <form action="{{route('guardar')}}" method = "post">
                 {{csrf_field()}}
                 <div class="mb-3">
-                    <label for="nombre" class="form-label">Nombre</label>
+                    <label for="nombre" class="form-label">Nombre y Apellidos</label>
                     <input type="text" class="form-control" name="nombre" minlength="5" maxlength="25" required>
                 </div>
 
