@@ -1,9 +1,9 @@
 @extends('layouts.header')
 @section('contenido')
 <div class="container col-sm-4 mt-3 mb-5">
-        <div class="border rounded pt-4 px-5 pb-3 shadow">
+    <div class="border rounded pt-4 px-5 pb-3 shadow">
             
-            <h1 class="text-center mb-3">Realiza tu reserva</h1>
+    <h1 class="text-center mt-4 mb-4" style='color:green'>Realiza tu reserva </h1>
 
             <form action="{{route('guardar')}}" method = "post">
                 {{csrf_field()}}
