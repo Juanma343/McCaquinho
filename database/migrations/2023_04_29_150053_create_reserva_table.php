@@ -19,7 +19,6 @@ return new class extends Migration
             $table->integer('mesas');
             $table->timestamp('timestamp');
             $table->string('observaciones')->nullable(true);
-            $table->timestamps();
         });
     }
 

@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->integer('mesas_maximas');
             $table->integer('mesas_disponibles');
-            $table->timestamps();
         });
     }
 
