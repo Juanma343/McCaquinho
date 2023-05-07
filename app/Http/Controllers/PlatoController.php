@@ -12,11 +12,26 @@ class PlatoController extends Controller
 {
 
     public function index() {
-        
+
+        $is_login = false;
+        $es_consultor = true;
+
+        if (Session::get('is_login') == true) {
+
+            $is_login = true;
+
+            if (Session::get('es_consultor') == false) {
+
+                $es_consultor = false;
+
+            }
+
+        }
+
         $platos = Platos::all()->where('plato_eliminado', false);
         
-        return view('carta')->with(['platos' => $platos]);
-
+        return view('carta')->with(['platos' => $platos, 'is_login' => $is_login, 'es_consultor' => $es_consultor]);
+        
     }
 
     public function guardarEnSesion(Request $request) { 
@@ -52,7 +67,7 @@ class PlatoController extends Controller
 
         }	
 
-        return redirect() -> route('platos')->with('success', 'El plato ha sido añadido a tu carrito correctamente');
+        return redirect()->route('platos')->with('success', 'El plato ha sido añadido a tu carrito correctamente');
 
     }
 

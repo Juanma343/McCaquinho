@@ -32,18 +32,23 @@
 
                             <p class='fw-bold'>{{$plato->precio}} €</p>
                             
-                            <form action="{{route('eliminar_plato')}}" method="POST">
-                                @method('PUT')
-                                @csrf
-                                <input type="hidden" name="id" value="{{$plato->id}}"></input>
-                                <button class="btn btn-danger" type="submit" value="Añadir"><i class="bi bi-trash"></i> Eliminar</button>
-                            </form>
+                            @if ($is_login == true && $es_consultor == false)
+                                <form action="{{route('eliminar_plato')}}" method="POST">
+                                    @method('PUT')
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{$plato->id}}"></input>
+                                    <button class="btn btn-danger" type="submit" value="Añadir"><i class="bi bi-trash"></i> Eliminar</button>
+                                </form>
+                            @endif
 
-                            <form action="{{route('guardar_en_sesion')}}" method="POST">
-                                @csrf
-                                <input type="hidden" name="id" value="{{$plato->id}}"></input>
-                                <button class="btn btn-primary" type="submit" value="Añadir">Añadir</button>
-                            </form>
+                            @if ($is_login == false)
+                                <form action="{{route('guardar_en_sesion')}}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{$plato->id}}"></input>
+                                    <button class="btn btn-primary" type="submit" value="Añadir">Añadir</button>
+                                </form>
+                            @endif
+
                             
                         </div>
         
