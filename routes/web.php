@@ -17,12 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+Route::get('/logout', 'App\Http\Controllers\loginController@logout')->name('logout');
+Route::get('/sesion', 'App\Http\Controllers\loginController@verSesion')->name('sesion');
+Route::post( '/login', 'App\Http\Controllers\loginController@login' )->name('login');
+Route::get('/login', 'App\Http\Controllers\loginController@loginview')->name('loginview');
+Route::post('/registro', 'App\Http\Controllers\loginController@registro')->name('registro');
+Route::get('/registro', 'App\Http\Controllers\loginController@registroview')->name('registroview');
+
+
