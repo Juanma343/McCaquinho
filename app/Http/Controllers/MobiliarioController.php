@@ -4,22 +4,32 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Mobiliario;
+use Illuminate\Contracts\Session\Session;
 
 class MobiliarioController extends Controller
 {
     public function administrar_mobiliario(){
-        return view('mobiliario.administrar_mobiliario');
+        if(Session::get('is_login') && Session::get('es_consultor') == false){
+            return view('mobiliario.administrar_mobiliario');
+        }else{
+            return view('login.login');
+        }
     }
 
     public function modificar(Request $request){
-        $mobiliario = Mobiliario::findOrFail(1);
-        if($request->Columna == 1){
-            $mobiliario->mesas_disponibles = $request->numero;
+        if(Session::get('is_login') && Session::get('es_consultor') == false){
+
+            $mobiliario = Mobiliario::findOrFail(1);
+            if($request->Columna == 1){
+                $mobiliario->mesas_disponibles = $request->numero;
+            }else{
+                $mobiliario->mesas_maximas = $request->numero;
+            }
+            $mobiliario->save();
+            return view('mobiliario.administrar_mobiliario_con_exito');
         }else{
-            $mobiliario->mesas_maximas = $request->numero;
+            return view('login.login');
         }
-        $mobiliario->save();
-        return view('mobiliario.administrar_mobiliario_con_exito');
     }
 
     public static function mesas_disponibles(){
