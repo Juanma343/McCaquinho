@@ -22,16 +22,16 @@
              <div class='col-12'>
                  <div class='card'>
                      <div class='card-body'>
-                        <p class='card-text fw-bold'>Pedido:   {{$pedido->id}}  </p>
-                        <p class='card-text fw-bold'>Fecha:   {{$pedido->timestamp}}  </p>
-                        <p class='card-text'>Nombre: {{$pedido->nombre}}  </p>
+                        <p class='card-text fw-bold'>Id del pedido:   {{$pedido->id}}  </p>
+                        <p class='card-text'>Fecha:   {{$pedido->timestamp}}  </p>
+                        <p class='card-text'>Nombre del cliente: {{$pedido->nombre}}  </p>
                         @if( $pedido->direccion == null) 
-                            <p> Recoger en tienda</p>
+                            <p> Recoger en restaurante</p>
                         @endif
                         @if( $pedido->direccion != null) 
-                            <p> Dirección: {{$pedido->direccion}}</p>
+                            <p> Dirección del cliente: {{$pedido->direccion}}</p>
                         @endif
-                        <p class='card-text'>Telefono: {{$pedido->telefono}}  </p>
+                        <p class='card-text fw-bold'>Telefono del cliente: {{$pedido->telefono}}  </p>
                      </div>
                  </div>
              </div>
