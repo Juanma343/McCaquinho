@@ -1,12 +1,26 @@
 @extends('layouts.header')
 @section('contenido')
+
+@if (session('success'))
+    <div class="alert alert-success text-center my-3 m-3" role="alert">
+        <h4>{{session('success')}}</h4>
+    </div>
+@endif
+
+@error('title')
+<div class="alert alert-danger text-center my-3 m-3" role="alert">
+    <h4>{{$message}}</h4>
+</div>
+@enderror
+
 <div class="container col-sm-4 mt-3 mb-5">
+
     <div class="border rounded pt-4 px-5 pb-3 shadow">
             
     <h1 class="text-center mt-4 mb-4" style='color:green'>Realiza tu reserva </h1>
 
-            <form action="{{route('guardar')}}" method = "post">
-                {{csrf_field()}}
+            <form action="{{route('guardarReserva')}}" method = "post">
+                @csrf
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre y Apellidos</label>
                     <input type="text" class="form-control" name="nombre" minlength="5" maxlength="25" required>

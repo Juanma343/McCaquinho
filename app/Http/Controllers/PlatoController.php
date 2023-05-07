@@ -82,4 +82,48 @@ class PlatoController extends Controller
 
     }
 
+    public function añadirPlato(){
+        return view('platos.plato');
+    }
+
+    public function guardarPlato(Request $request){
+        $plato = new Platos;
+        $plato->nombre = $request->Nombre_plato;
+        $plato->descripcion = $request->Descripcion;
+        $plato->precio = $request->Precio;
+        $plato->plato_eliminado = false;
+
+        $directorio = "img/";
+        $foto = $directorio . basename($_FILES["foto"]["name"]);
+        $formato_foto = strtolower(pathinfo($foto,PATHINFO_EXTENSION));
+        $existe = file_exists($foto);
+        $subida_ok = "0";
+
+
+        if($formato_foto == "jpg" || $formato_foto == "png" || $formato_foto == "jpeg" ) {
+            if(file_exists($foto) != "1"){
+                $subida_ok = "1";
+            }else{
+                $subida_ok = 0;
+            }
+        }
+        
+
+
+        if($subida_ok=="1"){
+
+            move_uploaded_file($_FILES["foto"]["tmp_name"], $foto);
+            $mensajeStatus = "Plato creado correctamente";
+            $plato->url_foto = $foto;
+            $plato->save();
+            
+        }else{
+           
+            $mensajeStatus = "No ha sido posible crear el plato. Comprueba el formato de la imagen y que ninguna foto tenga el mismo nombre";
+            
+        }
+
+        return redirect()->route('añadirPlato')->with('success', $mensajeStatus);
+    }
+
 }

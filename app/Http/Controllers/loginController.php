@@ -72,20 +72,21 @@ class loginController extends Controller
 
     public function registroview()
     {
-        if (Session::get('is_login') != null && Session::get('is_login') && Session::get('es_consultor') != null && !Session::get('es_consultor')) {
+        if (Session::get('is_login') && !Session::get('es_consultor')) {
 
-            return view('registro.registro');
+            return view('registro.registro');        
 
         } else {
 
-            return view('welcome');
+            return redirect()->route('loginview');
 
-        } 
+        }
+
     }
 
-    public function registro(Request $request)
-    {
-        if(Session::get('is_login') != null && Session::get('is_login') && Session::get('es_consultor') != null && !Session::get('es_consultor')) {
+    public function registro(Request $request) {
+
+        if (Session::get('is_login') && !Session::get('es_consultor')) {
 
             $nombre = $request->input('nombre');
             $contrasena = $request->input('contrasena');
@@ -97,31 +98,32 @@ class loginController extends Controller
             $usuario->es_consultor = $es_consultor;
             $usuario->save();
 
-            return view('login.login');
+            return redirect()->route('registroview')->with('success', 'Usuario creado correctamente');
             
         } else{
           
-            return view('welcome');
+            return redirect()->route('loginview');
 
         }     
+
     }
 
-    public function loginview()
-    {
-        if(Session::get('is_login') == null) {
+    public function loginview() {
+
+        if (Session::get('is_login') == null || Session::get('is_login') == false) {
 
             return view('login.login');
             
         } else {
 
-            return view('welcome');
+            return redirect()->route('logout');
 
         } 
     }
 
     public function logout()
     {
-        if(Session::get('is_login') != null) {
+        if (Session::get('is_login') != null) {
 
             Session::put('is_login', false);
             Session::put('es_consultor', true);

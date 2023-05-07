@@ -2,15 +2,15 @@
 @section('contenido')
 
     @if (session('success'))
-    <div class="alert alert-success text-center my-3 m-3" role="alert">
-        <h4>{{session('success')}}</h4>
-    </div>
+        <div class="alert alert-success text-center my-3 m-3" role="alert">
+            <h4>{{session('success')}}</h4>
+        </div>
     @endif
 
     @error('title')
-    <div class="alert alert-danger text-center my-3 m-3" role="alert">
-        <h4>{{$message}}</h4>
-    </div>
+        <div class="alert alert-danger text-center my-3 m-3" role="alert">
+            <h4>{{$message}}</h4>
+        </div>
     @enderror
 
     <div class="container text-center mt-3 mb-5">

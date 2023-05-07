@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Platos extends Model
 {
     use HasFactory;
-
-    protected $table = "plato"; // por defecto toma el nombre de la base de datos del nombre de la clase. En este caso lo sobreescribimos
     
+    protected $table = 'plato';
+    protected $primaryKey = 'id';
+    protected $fillable = ['nombre','descripcion', 'precio','url_foto', 'plato_eliminado'];
+    public $timestamps = false;
     // por defecto, la clave primaria es id y autoincremental
 
 }

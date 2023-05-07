@@ -79,7 +79,7 @@ class pedidoController extends Controller
         if ($platos != null) {
 
             foreach ($platos['platos'] as $id => $cantidad){
-
+            
                 if ($request->id == $id) $platos['platos'][$id] = $cantidad - 1; 
 
             }  
@@ -90,6 +90,14 @@ class pedidoController extends Controller
         
         return redirect('pedido');
 
+    }
+
+    public function mostrar_pedido(Request $request) {         
+        
+        $pedidos = Pedido::orderBy('id', 'desc')->paginate(4);         
+        
+        return view('pedido.mostrar_pedido')->with(['pedidos' => $pedidos]);     
+    
     }
 
 }

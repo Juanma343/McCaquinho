@@ -48,9 +48,9 @@
                             </a>
             
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="platosAdministrador.php">Crear plato</a></li>
+                                <li><a class="dropdown-item" href="{{route('guardarPlato')}}">Crear plato</a></li>
                                 <li><a class="dropdown-item" href="{{route('administrar_mobiliario')}}">Gestionar mesas</a></li>
-                                <li><a class="dropdown-item" href="usuariosAdministrador.php">Crear usuarios</a></li>
+                                <li><a class="dropdown-item" href="{{route('registroview')}}">Crear usuarios</a></li>
                             </ul>
         
                         </li>
@@ -65,7 +65,7 @@
 
                     @if ($is_login && $es_consultor)
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="pedidosConsultor.php">Lista de pedidos</a>
+                            <a class="nav-link active" aria-current="page" href="{{route('mostrar_pedido')}}">Lista de pedidos</a>
                         </li>
 
                         <li class="nav-item">
@@ -76,7 +76,7 @@
                 </ul>
                 
                 @if ($is_login)
-                    <a class="btn btn-danger ms-3" href="login.php">Cerrar sesión <i class="bi bi-door-closed"></i></a>
+                    <a class="btn btn-danger ms-3" href="{{route('logout')}}">Cerrar sesión <i class="bi bi-door-closed"></i></a>
                 @endif
 
                 @if (!$is_login)
