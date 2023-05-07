@@ -20,6 +20,8 @@ use Inertia\Inertia;
 Route::get('/', 'App\Http\Controllers\PlatoController@index')->name('platos');
 Route::post('/plato/sesion', 'App\Http\Controllers\PlatoController@guardarEnSesion')->name('guardar_en_sesion');
 Route::put('/plato', 'App\Http\Controllers\PlatoController@eliminarPlato')->name('eliminar_plato');
+Route::get('/añadir_plato', 'App\Http\Controllers\PlatoController@añadirPlato')->name('añadirPlato');
+Route::post('/añadir_plato', 'App\Http\Controllers\PlatoController@guardarPlato')->name('guardarPlato');
 
 // Rutas de Reserva
 Route::get('/consultar_reservas', 'App\Http\Controllers\ReservasController@consultar_reservas')->name('consultar_reservas');
