@@ -15,7 +15,6 @@ class ReservasController extends Controller
     public function consultar_reservas()
     {
         if(Session::get('is_login') && Session::get('es_consultor') == true){
-
             $reservas = Reserva::orderBy('id', 'desc')->paginate(4);
             return view('reservas.consultar_reservas')->with('reservas', $reservas);
         }else{
