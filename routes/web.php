@@ -47,6 +47,7 @@ Route::post('/auth/auth/login', 'App\Http\Controllers\loginController@login' )->
 Route::get('/auth/login', 'App\Http\Controllers\loginController@loginview')->name('loginview');
 Route::post('/auth/registro', 'App\Http\Controllers\loginController@registro')->name('registro');
 Route::get('/auth/registro', 'App\Http\Controllers\loginController@registroview')->name('registroview');
+Route::get('/nuestra_historia', 'App\Http\Controllers\loginController@nuestra_historia')->name('nuestra_historia');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

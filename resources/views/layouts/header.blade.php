@@ -58,7 +58,7 @@
 
                     @if (!$is_login)
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="nosotros.php">Nuestra historia</a>
+                            <a class="nav-link active" aria-current="page" href="{{route('nuestra_historia')}}">Nuestra historia</a>
                         </li>
                     @endif
 

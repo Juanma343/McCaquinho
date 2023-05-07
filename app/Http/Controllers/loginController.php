@@ -155,4 +155,10 @@ class loginController extends Controller
 
     }
 
+    public function nuestra_historia () {
+
+        return view('nuestra_historia');
+
+    }
+
 }
