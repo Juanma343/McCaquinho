@@ -8,21 +8,16 @@ use Illuminate\Http\Request;
 use App\Http\Requests\NuevoUsuarioRequest;
 use App\Models\Usuario;
 
+use Session;
+
 class loginController extends Controller
 {
 
     
     public function login(Request $request)
     {
-        // if(isset($_SESSION['is login']))
-        //     if($_SESSION['is login'] == true){
 
-        //         $_SESSION['is login'] = false;
-        //         return view('welcome');
-        //     }
-
-        session_start();
-        if(!isset($_SESSION['is_login']) && $_SESSION['is_login'] == false){
+        if(!Session::get('is_login') && Session::get('is_login') == false){
             $nombre = $request->input('nombre');
             $contrasenaLog = $request->input('contrasena');
             
@@ -42,14 +37,14 @@ class loginController extends Controller
 
                     if ($salida->es_consultor == 1) {
         
-                        $_SESSION['is_login'] = true;
-                        $_SESSION['es_consultor'] = true;
+                        Session::put('is_login', true);
+                        Session::put('es_consultor', true);
                         return view('welcome');
         
                     } else {
         
-                        $_SESSION['is_login'] = true;
-                        $_SESSION['es_consultor'] = false;
+                        Session::put('is_login', true);
+                        Session::put('es_consultor', false);
                         return view('welcome');
         
                     }
@@ -68,38 +63,61 @@ class loginController extends Controller
 
     public function registroview()
     {
-        return view('registro.registro');
+        if(Session::get('is_login') != null && Session::get('is_login') && Session::get('es_consultor') != null && !Session::get('es_consultor')){
+            return view('registro.registro');
+        }
+        else{
+            return view('welcome');
+        } 
     }
 
     public function registro(Request $request)
     {
-        $nombre = $request->input('nombre');
-        $contrasena = $request->input('contrasena');
-        $es_consultor = $request->input('es_consultor');
+        if(Session::get('is_login') != null && Session::get('is_login') && Session::get('es_consultor') != null && !Session::get('es_consultor')){
+            $nombre = $request->input('nombre');
+            $contrasena = $request->input('contrasena');
+            $es_consultor = $request->input('es_consultor');
 
-        $usuario = new Usuario();
-        $usuario->nombre = $nombre;
-        $usuario->contrasena = $contrasena;
-        $usuario->es_consultor = $es_consultor;
-        $usuario->save();
+            $usuario = new Usuario();
+            $usuario->nombre = $nombre;
+            $usuario->contrasena = $contrasena;
+            $usuario->es_consultor = $es_consultor;
+            $usuario->save();
 
-        return view('login.login');
+            return view('login.login');
+        }
+        else{
+            return view('welcome');
+        }     
     }
 
     public function loginview()
     {
-        return view('login.login');
+        if(Session::get('is_login') == null){
+            return view('login.login');
+        }
+        else{
+            return view('welcome');
+        } 
     }
     public function logout()
     {
-        session_start();
-        $_SESSION['is login'] = false;
-        return view('welcome');
+        if(Session::get('is_login') != null){
+            Session::put('is_login', false);
+            return view('welcome');
+        }
+        else{
+            return view('welcome');
+        }
     }
     public function verSesion()
     {
-        session_start();
-        echo $_SESSION['is_login'];
+        if(Session::get('is_login')){
+            echo "true";
+        }
+        else{
+            echo "false";
+        }
         return view('welcome');
     }
 }
