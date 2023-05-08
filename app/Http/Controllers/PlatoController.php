@@ -87,6 +87,7 @@ class PlatoController extends Controller
     }
 
     public function guardarPlato(Request $request){
+        
         $plato = new Platos;
         $plato->nombre = $request->Nombre_plato;
         $plato->descripcion = $request->Descripcion;

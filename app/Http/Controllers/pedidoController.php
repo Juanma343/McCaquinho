@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pedido;
+use App\Models\LineaPedido;
 use \App\Models\Platos;
 
 use Session;
@@ -13,6 +14,8 @@ class pedidoController extends Controller
     
     public function guardar(Request $request) {
 
+        $platos = Session::get('platos');
+
         $pedido = new Pedido;
         $pedido->nombre = $request->txtNombre;
         $pedido->direccion = $request->txtDireccion;
@@ -20,7 +23,21 @@ class pedidoController extends Controller
 
         $pedido->save();
 
-        return view('pedido.pedido');
+        foreach ($platos['platos'] as $id => $cantidad) {
+
+            $lineaPedido = new LineaPedido;
+            
+            $lineaPedido->id_pedido = $pedido->id;
+            $lineaPedido->id_plato = $id;
+            $lineaPedido->cantidad = $cantidad;
+
+            $lineaPedido->save();
+
+        }
+
+        Session::put("platos", []); 
+
+        return redirect()->route('pedido')->with('success', 'Tu pedido se ha realizado correctamente');
         
     }
 

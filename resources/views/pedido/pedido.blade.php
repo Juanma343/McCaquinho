@@ -1,22 +1,17 @@
 @extends('layouts.header')
 @section('contenido')
 
-<!DOCTYPE html>
+@if (session('success'))
+        <div class="alert alert-success text-center my-3 m-3" role="alert">
+            <h4>{{session('success')}}</h4>
+        </div>
+    @endif
 
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- Iconos de Boostrap -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-	<!-- Bootstrap CSS -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-	<!-- CSS propio -->
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	<title>Pedido</title>
-</head>
-<body>
-
+    @error('title')
+        <div class="alert alert-danger text-center my-3 m-3" role="alert">
+            <h4>{{$message}}</h4>
+        </div>
+    @enderror
 
 <div class="container mt-5">
 
@@ -54,8 +49,13 @@
                 <input type="hidden" name="realizarlineapedido" ></input>
                 
                 <!-- Si el carrito esta vacio, no dejamos hacer el pedido -->
-                <button type="submit" class="btn btn-success">Realizar pedido</button>
-                
+                @if (count($platos) < 1) 
+                    <button type="submit" class="btn btn-success" disabled>Realizar pedido</button>
+                @endif
+
+                @if (count($platos) >= 1)
+			        <button type="submit" class="btn btn-success">Realizar pedido</button>                
+                @endif
 
             </form>
             

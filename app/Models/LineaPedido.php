@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pedido extends Model {
+class LineaPedido extends Model {
 
     use HasFactory;
 
-    protected $table='pedido';
-    protected $primaryKey = 'id';
-    protected $fillable = ['telefono', 'timestamp', 'direccion', 'nombre'];
+    protected $table='linea_pedido';
+    protected $fillable = ['id_pedido', 'id_plato', 'cantidad'];
     public $timestamps = false;
     
 }
